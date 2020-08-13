@@ -1,4 +1,4 @@
-const cookieParser = require("cookie-parser")
+
 
 const { User } = require("../models/User")
 

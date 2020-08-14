@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from "react"
+import axios from "axios"
 
 function GoodsHistory() {
   const [food, setFood] = useState([])
@@ -8,30 +8,36 @@ function GoodsHistory() {
   let foodfoodfood = []
 
   useEffect(() => {
-    axios.post('/api/goodshistory').then((response) => {
+    axios.post("/api/goodshistory").then((response) => {
       if (response.data.success) {
         response.data.ojy.forEach((item) => {
           foodfood.push(item)
         })
         foodfoodfood = response.data.ojy.filter((items) => {
-          return items.price > 10000
+          return items.price > 20000
         })
         setFood(foodfood)
         setFoodPrice(foodfoodfood)
       } else {
-        console.log('실패')
+        console.log("실패")
       }
     })
   }, [])
-  console.log(food);
-  
+  console.log(food)
 
   return (
     <div>
       <ul>
-  {food.map((a) => (<li>{a.price}{a.goods}</li>))}
+        {food.map((a) => (
+          <li>
+            {a.price}
+            {a.goods}
+          </li>
+        ))}
       </ul>
-      {foodPrice.map((element, index) => (<div key={index}>{element.goods}</div>))}
+      {foodPrice.map((element, index) => (
+        <div key={index}>{element.goods}</div>
+      ))}
     </div>
   )
 }

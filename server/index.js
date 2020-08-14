@@ -75,7 +75,7 @@ app.post("/api/dashboard", (req, res) => {
 
 app.post("/api/goodshistory", (req, res) => {
   DashBoard.find({}, (err, ojy) => {
-    // console.log(ojy)
+    
 
     if (err) {
       return res.status(400).json({ success: false, err })

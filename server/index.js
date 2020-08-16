@@ -40,7 +40,7 @@ app.post("/api/test", (req, res) => {
 // @로그인
 
 app.post("/api/testlogin", (req, res) => {
-  Test.find({ id: req.body.id, password: req.body.password }, (err, user) => {
+  Test.find({ id: req.body.id, password: req.body.password}, (err, user) => {
     if (!user) {
       return res.json({
         success: false,
@@ -75,8 +75,6 @@ app.post("/api/dashboard", (req, res) => {
 
 app.post("/api/goodshistory", (req, res) => {
   DashBoard.find({}, (err, ojy) => {
-    
-
     if (err) {
       return res.status(400).json({ success: false, err })
     } else {
@@ -86,4 +84,39 @@ app.post("/api/goodshistory", (req, res) => {
 })
 
 //--------------------------------------------------------------------------------------------------------
+
+// @상품삭제
+
+app.post("/api/delete", (req, res) => {
+  console.log(req.body.name)
+
+  DashBoard.deleteOne({ goods: req.body.name }, (err, ojy) => {
+    if (err) {
+      return res.status(400).json({ success: false, err })
+    } else {
+      return res.status(200).json({ success: true, ojy })
+    }
+  })
+})
+
+//중복된 앤드포인트는 실행을 못한다
+//--------------------------------------------------------------------------------------------------------
+
+// @전체삭제
+
+app.post("/api/alldelete", (req, res) => {
+  
+
+  DashBoard.remove({}, (err) => {
+    if (err) {
+      return res.status(400).json({ success: false, err })
+    } else {
+      return res.status(200).json({ success: true})
+    }
+  })
+})
+
+
+//--------------------------------------------------------------------------------------------------------
+
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}!`)) //이후 포트4000으로 이앱을 실행시킨다 이 앱이 4000포트에 리슨을하면 이 콘솔이 프린트가 된다

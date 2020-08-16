@@ -4,7 +4,13 @@ const testSchema = mongoose.Schema({
   name: {
     type: String,
   },
+  id: {
+    type: String,
+  },
   password: {
+    type: String,
+  },
+  email: {
     type: String,
   },
 })

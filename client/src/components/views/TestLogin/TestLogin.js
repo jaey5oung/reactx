@@ -1,8 +1,10 @@
 import React, { useState } from "react"
 import axios from "axios"
+import { withRouter } from "react-router-dom"
 
-
-function TestLogin() {
+function TestLogin(props) {
+  
+  
   const [Id, setId] = useState("")
   const [Password, setPassword] = useState("")
 
@@ -22,9 +24,11 @@ function TestLogin() {
       password: Password,
     }
 
-    axios.post("/api/testlogin", body).then((response) => {
+    axios.post("/api/testLogin", body).then((response) => {
       if (response.data.success) {
         console.log(response.data)
+        alert("로그인성공")
+        props.history.push("/goodshistory")
       } else {
         console.log("실패")
       }
@@ -44,10 +48,10 @@ function TestLogin() {
       아이디
       <input type="text" onChange={onId} />
       비밀번호
-      <input type="text" onChange={onPassword} />
+      <input type="password" onChange={onPassword} />
       <button onClick={onClickHandler}>로그인</button>
     </div>
   )
 }
 
-export default TestLogin
+export default withRouter(TestLogin)

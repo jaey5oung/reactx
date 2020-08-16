@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import axios from "axios"
+import { withRouter } from "react-router-dom"
 
-
-function Test() {
+function Test(props) {
   const [Name, setName] = useState("")
   const [Id, setId] = useState("")
   const [Password, setPassword] = useState("")
@@ -23,7 +23,6 @@ function Test() {
   }
 
   const onClickHandler = () => {
-    alert("완료")
     console.log(Name)
     console.log(Id)
     console.log(Password)
@@ -38,6 +37,8 @@ function Test() {
 
     axios.post("/api/test", body).then((response) => {
       if (response.data.success) {
+        alert("회원가입성공")
+        props.history.push("/testlogin")
         console.log(response.data)
       } else {
         console.log("실패")
@@ -60,7 +61,7 @@ function Test() {
       아이디
       <input type="text" onChange={onId} />
       비밀번호
-      <input type="text" onChange={onPassword} />
+      <input type="password" onChange={onPassword} />
       이메일
       <input type="text" onChange={onEmail} />
       <button onClick={onClickHandler}>회원가입</button>
@@ -68,4 +69,4 @@ function Test() {
   )
 }
 
-export default Test
+export default withRouter(Test)

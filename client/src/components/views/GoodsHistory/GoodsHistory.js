@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
 
-
 function GoodsHistory() {
   const [food, setFood] = useState([])
   const [foodPrice, setFoodPrice] = useState([])
@@ -30,12 +29,7 @@ function GoodsHistory() {
     })
   }
 
-
-
-
-
   const onAllDelete = () => {
- 
     alert("전제삭제완료")
     axios.post("/api/alldelete").then((response) => {
       if (response.data.success) {
@@ -82,7 +76,7 @@ function GoodsHistory() {
       {foodPrice.map((element, index) => (
         <div key={index}>{element.goods}</div>
       ))}
-     
+
       <button onClick={onAllDelete}>전체삭제</button>
     </div>
   )
@@ -98,5 +92,5 @@ export default GoodsHistory
 //arr.forEach(item=>{console.log(item)})
 //이렇게 했을시 arr.Each()를 통해 리턴되는 값은 없고 그냥 console.log(item)이 item의 수만큼 실행된다. 만약 arr배열이 4개의 원소를 갖고 있으면 4번의 console문이 실행된다
 
-
 //일단 딜리트 한번더 해보고, 업데이트는 수정눌렀을때 그 상품만 페이지로 넘길수있게
+//화요일까지

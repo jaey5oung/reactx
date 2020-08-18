@@ -41,10 +41,11 @@ function DashBoard(props) {
 
   return (
     <div>
-      <br />
+      <h1>상품등록</h1>
       상품명
       <br />
       <input type="text" onChange={onGoods} />
+      <br />
       <br />
       가격
       <br />
@@ -54,6 +55,7 @@ function DashBoard(props) {
       설명
       <br />
       <textarea type="text" onChange={onExplan} />
+      <br />
       <br />
       <button onClick={onClickHandler}>등록</button>
     </div>

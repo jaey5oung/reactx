@@ -3,8 +3,6 @@ import axios from "axios"
 import { withRouter } from "react-router-dom"
 
 function TestLogin(props) {
-  
-  
   const [Id, setId] = useState("")
   const [Password, setPassword] = useState("")
 
@@ -36,19 +34,16 @@ function TestLogin(props) {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: "100vh",
-      }}
-    >
+    <div>
+      <h1>로그인</h1>
       아이디
+      <br />
       <input type="text" onChange={onId} />
+      <br />
+      <br />
       비밀번호
-      <input type="password" onChange={onPassword} />
+      <br />
+      <input type="password" onChange={onPassword} /><br/><br/>
       <button onClick={onClickHandler}>로그인</button>
     </div>
   )

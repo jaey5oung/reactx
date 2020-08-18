@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
 
-function GoodsHistory() {
+function GoodsHistory(props) {
   const [food, setFood] = useState([])
   const [foodPrice, setFoodPrice] = useState([])
+  const [test, setTest] = useState([])
+  const [goods, setGoods] = useState("")
+  const [price, setPrice] = useState("")
+  const [explan, setExplan] = useState("")
+  const [Id, setId] = useState("")
+
   const foodfood = []
   let foodfoodfood = []
 
@@ -14,9 +20,9 @@ function GoodsHistory() {
   //2번
   //변수에 .을 넣지않는다 그래서 넘겨올땐 새로운 변수의 이름을 정해준다 그때 넘겨올때 이름을 정할땐 넘겨주는거랑 이름을 마춰 그것을
   //넘겨준다는 다른사람이 생각할수있게끔해준다
-  const onDelete = (goodsData) => {
+  const onDelete = (_id) => {
     let body = {
-      name: goodsData,
+      _id: _id,
     }
     alert("삭제완료")
     axios.post("/api/delete", body).then((response) => {
@@ -60,16 +66,61 @@ function GoodsHistory() {
     })
   }
 
+  const onUpdate = (_id) => {
+    setId(_id)
+    let body = {
+      _id: _id,
+    }
+    axios.post("/api/update", body).then((response) => {
+      if (response.data.success) {
+        setTest(response.data.ojy)
+      } else {
+        console.log("실패")
+      }
+    })
+  }
+  const onGoods = (e) => {
+    setGoods(e.target.value)
+  }
+
+  const onPrice = (e) => {
+    setPrice(e.target.value)
+  }
+  const onExplan = (e) => {
+    setExplan(e.target.value)
+  }
+  const UpdateSuccess = () => {
+    console.log(goods)
+    console.log(price)
+    console.log(explan)
+    let body = {
+      goods: goods,
+      price: price,
+      explan: explan,
+      _id: Id,
+    }
+    axios.post("/api/goodsupdate", body).then((response) => {
+      if (response.data.success) {
+        alert("상품수정완료")
+
+        fetchPage()
+      } else {
+        console.log("실패")
+      }
+    })
+  }
   return (
     //1번
     <div>
+      <h1>싱품목록</h1>
       <ul>
         {food.map((a, index) => (
           <li key={index}>
             {a.price}
             {a.goods}
-            <button onClick={() => onDelete(a.goods)}>삭제</button>
-            <button>상품수정</button>
+
+            <button onClick={() => onDelete(a._id)}>삭제</button>
+            <button onClick={() => onUpdate(a._id)}>상품수정</button>
           </li>
         ))}
       </ul>
@@ -78,6 +129,28 @@ function GoodsHistory() {
       ))}
 
       <button onClick={onAllDelete}>전체삭제</button>
+      <br />
+      <br />
+      <br />
+      <hr />
+      <h1>정보수정</h1>
+      <div>
+        <br />
+        상품명<br/>
+        <input placeholder={test.goods} onChange={onGoods} />
+        <br />
+        <br />
+        상품가격<br/>
+        <input placeholder={test.price} onChange={onPrice} />
+        <br />
+        <br />
+        상품정보<br/>
+        <input placeholder={test.explan} onChange={onExplan} />
+        <br />
+        <br />
+        <button onClick={UpdateSuccess}>수정완료</button>
+        <br />
+      </div>
     </div>
   )
 }
@@ -94,3 +167,7 @@ export default GoodsHistory
 
 //일단 딜리트 한번더 해보고, 업데이트는 수정눌렀을때 그 상품만 페이지로 넘길수있게
 //화요일까지
+
+{
+  /* <UpdatePage ojy={food} /> */
+}

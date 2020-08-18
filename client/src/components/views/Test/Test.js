@@ -47,23 +47,28 @@ function Test(props) {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: "100vh",
-      }}
-    >
+    <div>
+      <h1>회원가입</h1>
       이름
+      <br />
       <input type="text" onChange={onName} />
+      <br />
+      <br />
       아이디
+      <br />
       <input type="text" onChange={onId} />
+      <br />
+      <br />
       비밀번호
+      <br />
       <input type="password" onChange={onPassword} />
+      <br />
+      <br />
       이메일
+      <br />
       <input type="text" onChange={onEmail} />
+      <br />
+      <br />
       <button onClick={onClickHandler}>회원가입</button>
     </div>
   )

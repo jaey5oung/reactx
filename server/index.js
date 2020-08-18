@@ -40,7 +40,7 @@ app.post("/api/test", (req, res) => {
 // @로그인
 
 app.post("/api/testlogin", (req, res) => {
-  Test.find({ id: req.body.id, password: req.body.password}, (err, user) => {
+  Test.find({ id: req.body.id, password: req.body.password }, (err, user) => {
     if (!user) {
       return res.json({
         success: false,
@@ -88,9 +88,7 @@ app.post("/api/goodshistory", (req, res) => {
 // @상품삭제
 
 app.post("/api/delete", (req, res) => {
-  console.log(req.body.name)
-
-  DashBoard.deleteOne({ goods: req.body.name }, (err, ojy) => {
+  DashBoard.deleteOne({ _id: req.body._id }, (err, ojy) => {
     if (err) {
       return res.status(400).json({ success: false, err })
     } else {
@@ -105,17 +103,51 @@ app.post("/api/delete", (req, res) => {
 // @전체삭제
 
 app.post("/api/alldelete", (req, res) => {
-  
-
   DashBoard.remove({}, (err) => {
     if (err) {
       return res.status(400).json({ success: false, err })
     } else {
-      return res.status(200).json({ success: true})
+      return res.status(200).json({ success: true })
     }
   })
 })
 
+//--------------------------------------------------------------------------------------------------------
+
+// @업데이트
+
+app.post("/api/update", (req, res) => {
+  DashBoard.findOne({ _id: req.body._id }, (err, ojy) => {
+    if (err) {
+      return res.status(400).json({ success: false, err })
+    } else {
+      return res.status(200).json({ success: true, ojy })
+    }
+  })
+})
+
+//--------------------------------------------------------------------------------------------------------
+
+// @상품수정완료업데이트
+
+app.post("/api/goodsupdate", (req, res) => {
+  DashBoard.findOneAndUpdate(
+    { _id: req.body._id }, //내가보낸 id값을 찾아들어간다
+    {
+      $set: {
+        //id값을풀고 밑에것들을 업어친다 업뎃한다
+        goods: req.body.goods,
+        price: req.body.price,
+        explan: req.body.explan,
+      },
+    },
+    { new: true } //위에 업데이트된것들을 확정지어서 바꿔준다
+  ).exec((err, doc) => {
+    //exec 쿼리실행 위에것들을 바꾸고난후
+    if (err) return res.status(400).json({ success: false, err })
+    return res.status(200).json({ success: true, doc })
+  })
+})
 
 //--------------------------------------------------------------------------------------------------------
 

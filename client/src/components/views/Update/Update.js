@@ -3,8 +3,6 @@
 // function Update({ ojy }) {
 //   console.log(11, ojy)
 
-//   //props 받는 방법
-//   //1. 한번에 받는 방법
 
 //   return (
 //     <div>

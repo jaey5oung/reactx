@@ -113,6 +113,8 @@ function GoodsHistory(props) {
     //1번
     <div>
       <h1>싱품목록</h1>
+      상품 총 개수 :{food.length}
+
       <ul>
         {food.map((a, index) => (
           <li key={index}>
@@ -127,7 +129,6 @@ function GoodsHistory(props) {
       {foodPrice.map((element, index) => (
         <div key={index}>{element.goods}</div>
       ))}
-
       <button onClick={onAllDelete}>전체삭제</button>
       <br />
       <br />
@@ -136,15 +137,18 @@ function GoodsHistory(props) {
       <h1>정보수정</h1>
       <div>
         <br />
-        상품명<br/>
+        상품명
+        <br />
         <input placeholder={test.goods} onChange={onGoods} />
         <br />
         <br />
-        상품가격<br/>
+        상품가격
+        <br />
         <input placeholder={test.price} onChange={onPrice} />
         <br />
         <br />
-        상품정보<br/>
+        상품정보
+        <br />
         <input placeholder={test.explan} onChange={onExplan} />
         <br />
         <br />
@@ -164,9 +168,6 @@ export default GoodsHistory
 //forEach : 배열의 각 item들에 대한 어떠한 처리를 한다
 //arr.forEach(item=>{console.log(item)})
 //이렇게 했을시 arr.Each()를 통해 리턴되는 값은 없고 그냥 console.log(item)이 item의 수만큼 실행된다. 만약 arr배열이 4개의 원소를 갖고 있으면 4번의 console문이 실행된다
-
-//일단 딜리트 한번더 해보고, 업데이트는 수정눌렀을때 그 상품만 페이지로 넘길수있게
-//화요일까지
 
 {
   /* <UpdatePage ojy={food} /> */

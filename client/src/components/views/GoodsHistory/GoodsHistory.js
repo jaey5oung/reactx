@@ -137,7 +137,7 @@ function GoodsHistory(props) {
       <h1>정보수정</h1>
       <div>
         <br />
-        상품명
+        상품명1
         <br />
         <input placeholder={test.goods} onChange={onGoods} />
         <br />
